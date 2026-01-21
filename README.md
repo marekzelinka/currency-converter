@@ -1,0 +1,4 @@
+- [ ] explore injections, services load json service, exchange rate service
+- [ ] add logging
+- [ ] first get the final rate, then the result
+  - [ ] log out both
