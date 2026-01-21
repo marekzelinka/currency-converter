@@ -1,0 +1,29 @@
+[project]
+name = "currency-converter"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.13",
+    "ty>=0.0.13",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", "F",     # Default Error & Pyflakes
+    "RUF",        # Ruff-specific rules
+    "W",          # pycodestyle warnings
+    "C4",         # flake8-comprehensions
+    "UP",         # pyupgrade
+    "ARG001",     # unused arguments in functions
+    "ANN",        # flake8-annotations (Strict type hinting)
+    "UP",         # pyupgrade (Newest type syntax: e.g., int | None)
+    "B",          # flake8-bugbear (Common logic errors)
+    "I",          # isort (Import sorting)
+    "FAST",       # FastAPI,
+    "ASYNC",      # flake8-async (crucial for FastAPI/Async SQLAlchemy)
+]
