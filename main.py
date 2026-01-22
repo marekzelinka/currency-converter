@@ -32,22 +32,33 @@ def convert(
     from_rate = rates.get(from_currency)
     to_rate = rates.get(to_currency)
     if not to_rate:
-        raise ValueError(f"Rate is invalid: to is {to_currency}")
+        raise ValueError(f"Currency code: {to_currency!r} is invalid.")
 
     if from_currency == "eur":
         return amount * to_rate["rate"]
 
     if not from_rate:
-        raise ValueError(f"Rate is invalid: base is {from_currency}")
+        raise ValueError(f"Currency code: {from_currency!r} is invalid.")
 
-    return amount * (to_rate["rate"] / from_rate["rate"])
+    rate = to_rate["rate"] / from_rate["rate"]
+    result = amount * rate
+
+    logging.info(f"Using rate {rate}")
+
+    return result
 
 
 def main() -> None:
     # Load the currency rates
     rates = load_rates("rates.json")
-    conversion = convert(from_currency="eur", to_currency="dkk", amount=75, rates=rates)
-    print(conversion)
+    try:
+        # Get the conversion result
+        conversion = convert(
+            from_currency="dkk", to_currency="eur", amount=75, rates=rates
+        )
+        print(conversion)
+    except ValueError as e:
+        print(f"An error occurred: {e}.")
 
 
 if __name__ == "__main__":
