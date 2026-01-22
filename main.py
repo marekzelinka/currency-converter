@@ -31,11 +31,19 @@ def convert(
 
     from_rate = rates.get(from_currency)
     to_rate = rates.get(to_currency)
-    if not to_rate:
-        raise ValueError(f"Currency code: {to_currency!r} is invalid.")
 
     if from_currency == "eur":
+        if not to_rate:
+            raise ValueError(f"Currency code: {to_currency!r} is invalid.")
         return amount * to_rate["rate"]
+
+    if to_currency == "eur":
+        if not from_rate:
+            raise ValueError(f"Currency code: {from_currency!r} is invalid.")
+        return amount * from_rate["inverseRate"]
+
+    if not to_rate:
+        raise ValueError(f"Currency code: {to_currency!r} is invalid.")
 
     if not from_rate:
         raise ValueError(f"Currency code: {from_currency!r} is invalid.")
@@ -54,7 +62,7 @@ def main() -> None:
     try:
         # Get the conversion result
         conversion = convert(
-            from_currency="dkk", to_currency="eur", amount=75, rates=rates
+            from_currency="dkk", to_currency="aud", amount=75, rates=rates
         )
         print(conversion)
     except ValueError as e:
