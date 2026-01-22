@@ -33,7 +33,7 @@ def exchange_rate(
         )
         print(conversion_rate)
     except ValueError as e:
-        print(f"An error occurred: {e}.")
+        print(f"An error occurred: {e}")
 
 
 @app.command()
