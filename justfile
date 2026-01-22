@@ -1,5 +1,5 @@
-run:
-    uv run main.py
+run *ARGS:
+    uv run main.py {{ ARGS }}
 
 typecheck:
     uv run ty check
